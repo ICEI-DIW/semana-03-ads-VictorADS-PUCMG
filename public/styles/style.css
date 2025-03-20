@@ -79,7 +79,7 @@ footer {
 }
 
 /* Estiliza o campo de busca */
-.input-busca {
+.inputBusca {
     border: none;
     outline: none;
     width: 40%;
