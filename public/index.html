@@ -1,12 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+    <title>Odisseia</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
+    <!--cabeçalho Funcional do site ( Odiseia ate painel de busca)-->
+    <header class="title">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Ícone" class="icone">
+        ODISSEIA <!--Nome do site e seu icone-->
+    </header>
+    <nav class="painelDeBotoes">
+        <div class="menu">
+            <!--Painel de navegação interna do site-->
+            <a href="">HOME</a> |
+
+            <a href="">HOME</a> |
+
+            <a href="">HOME</a> |
+
+            <a href="">HOME</a> |
+
+
+        </div>
+    </nav>
+    <nav class="busca">
+        <div class="alinhamentoItem">
+            <input type="text" class="input-busca" placeholder="Buscar..." />
+            <button class="botaoBusca">Buscar</button>
+            <!--Painel de busca online do site(não funcional ate o momento)-->
+        </div>
+    </nav>
+    <!--Fim cabeçalho Funcional do site ( Odiseia ate painel de busca)-->
+
+
     
+    <Main class="videoEmDestaque"> <!--Cria o espaço reservado para o video-->
+        <div class="Video"> <!--Alinha o espaço do video para o centro-->
+            <!--Video em destaque do site-->
+            <iframe width="878" height="500" src="https://www.youtube.com/embed/xdx9Z9pgkRc"
+                title="O ROMANCE DOS DOIS FUMANTES CONTINUA! E TÁ AVANÇANDO 😍 (Super no Ura de Yani Suu Futari Manga)"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+        </div>
+    </Main>
+
+    <a href="Login.html" class="botao-flutuante">+</a> <!-- Botão flutuante de Login-->
+
+    <article class="Manga"> <!--Espaço para os mangas em destaque-->
+        <section class="alinhamentoItem"> <!--Gera a galeria em horizontal para os mangas-->
+
+            <!--Mangas em destaque-->
+            <!--Para definir o manga, utilize a função backgroud-image para alterar individualmente -->
+            <a class="mangaDestaque" href="next.html" style="background-color: #b50000;">Botão 1</a>
+            <a class="mangaDestaque" href="next.html" style="background-color: #088a19;">Botão 1</a>
+            <a class="mangaDestaque" href="next.html" style="background-color: #0502a2;">Botão 1</a>
+            <a class="mangaDestaque" href="next.html" style="background-color: #ffffff;">Botão 1</a>
+            <a class="mangaDestaque" href="next.html" style="background-color: #510345;">Botão 1</a>
+
+        </section>
+    </article>
+    <footer>
+        <!--Footer do site, permitindo os creditos-->
+        Victor Hugo (PUC-ADS)
+    </footer>
 </body>
 </html>

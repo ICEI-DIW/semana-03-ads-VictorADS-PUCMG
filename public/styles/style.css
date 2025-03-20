@@ -1,0 +1,164 @@
+/* Remove as margens padrão do body e impede o scroll horizontal */
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Estiliza o painel de botões no topo da página */
+.painelDeBotoes {
+    width: 100%;
+    height: 60px;
+    background-color: rgb(90, 0, 87);
+}
+
+/* Define a área da barra de busca */
+.busca {
+    width: 100%;
+    height: 60px;
+    background-color: rgb(42, 42, 165);
+}
+
+/* Define o tamanho e a cor de fundo do vídeo em destaque */
+.videoEmDestaque {
+    width: 100%;
+    height: 550px;
+    background-color: chocolate;
+}
+
+/* Centraliza os vídeos dentro da seção */
+.Video {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 25px;
+}
+
+/* Define a seção de mangás com altura e cor de fundo */
+.Manga {
+    width: 100%;
+    height: 520px;
+    background-color: aquamarine;
+}
+
+/* Estiliza o rodapé da página */
+footer {
+    width: 100%;
+    height: 20px;
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    color: aliceblue;
+}
+
+/* Centraliza os itens dentro da seção */
+.alinhamentoItem {
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    display: flex;
+    gap: 20px; /* Define um espaçamento entre os itens */
+    padding: 10px; /* Espaço entre os botões */
+}
+
+/* Estiliza os botões da página */
+.mangaDestaque {
+    text-decoration: none;
+    width: 250px;
+    height: 450px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    line-height: 450px; /* Centraliza o texto verticalmente */
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+.mangaDestaque:hover {
+    width: 270px;
+    height: 450px;
+}
+
+/* Estiliza o campo de busca */
+.input-busca {
+    border: none;
+    outline: none;
+    width: 40%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+/* Estiliza o botão de busca */
+.botaoBusca {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Efeito ao passar o mouse sobre o botão de busca */
+.botaoBusca:hover {
+    background-color: #0056b3;
+}
+
+/* Estiliza o menu e os links */
+.menu, a {
+    padding: 21px;
+    font-size: 18px;
+    text-align: center;
+    align-items: center;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* Botão flutuante no canto inferior direito */
+.botao-flutuante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: #b50000;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Efeito ao passar o mouse sobre o botão flutuante */
+.botao-flutuante:hover {
+    background-color: #8a0000;
+    transform: scale(1.1);
+}
+
+/* Alinha o título e o ícone corretamente */
+.title {
+    display: flex;
+    align-items: center; /* Centraliza o ícone e o texto verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    font-size: 28px;
+    font-weight: bold;
+    background-color: brown;
+    color: white;
+    padding: 2px;
+    width: 100%;
+    height: 40px; /* Define uma altura fixa para melhor alinhamento */
+}
+
+/* Define o ícone circular */
+.icone {
+    width: 30px; /* Ajuste conforme necessário */
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 15px; /* Espaço entre o ícone e o texto */
+}
