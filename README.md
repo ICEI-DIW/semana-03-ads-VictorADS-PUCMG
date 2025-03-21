@@ -8,17 +8,21 @@ Nessa atividade, você deverá montar a página inicial do projeto escolhido, a 
 
 ## Informações Gerais
 
-- Nome:
-- Matricula:
-- Proposta de projeto escolhida:
-- Breve descrição sobre seu projeto:
+- Nome:Victor Hugo Ribeiro
+- Matricula: 881567
+- Proposta de projeto escolhida:  Biblioteca de mangas
 
+- Breve descrição sobre seu projeto:
+uma plataforma de mangas e historia em quadrinhos, podendo armazenar os mangas, serem avaliados com o tempo e com login serem favoritados para facilitar o acesso a coleção 
 
 ## Print do esboço criada
 
-<<  COLOQUE A IMAGEM AQUI >>
+![Tela inicial](public/img/Ideia/1.png)
+![Tela de login](public/img/Ideia/2.png)
 
 
 ## Print da home-page criada
 
-<<  COLOQUE A IMAGEM AQUI >>
+![Tela inicial web](public/img/Tela/Inicial%201.png)
+![Tela inicial web](public/img/Tela/inicial%202.pngg)
+![Tela login web](public/img/Tela/login.png)
