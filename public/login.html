@@ -7,20 +7,20 @@
     <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
-    
-        <div class="caixaLogin"><!--Caixa de login centralizada-->
-            <img src="img/icon/iconedePagina.jpeg" alt="Usuário" class="iconeUsuario"> <!--Icone do login-->
-            <h2>LOGIN</h2>
-            <form>
-                <input type="email" placeholder="Gmail" required> <!--gmail ou usuario, pode ser alterado no fim do projeto para melhor experiencia -->
-                <input type="password" placeholder="Senha" required> <!--Senha padrão para login -->
-                <button type="submit" class="botaoLogin">Entrar</button> <!--botão de logar-->
-            </form>
-            <div class="caixaBotaoExtra"> <!--Opçoes de entrada-->
-                <button class="botaoExtra">Esqueci a senha</button> <!--botão a esquerda-->
-                <button class="botaoExtra">Criar conta</button> <!--botão a direita-->
-            </div>
+    <div class="caixaLogin">
+        <img src="img/icon/iconedePagina.jpeg" alt="Usuário" class="iconeUsuario">
+        <h2>LOGIN</h2>
+        <form onsubmit="fazerLogin(event)">
+            <input type="email" id="email" placeholder="Gmail" required>
+            <input type="password" id="senha" placeholder="Senha" required>
+            <button type="submit" class="botaoLogin">Entrar</button>
+        </form>
+        <div class="caixaBotaoExtra">
+            <button class="botaoExtra">Esqueci a senha</button>
+            <button class="botaoExtra">Criar conta</button>
         </div>
-    
+    </div>
+
+    <script src="scripts/login.js"></script>
 </body>
 </html>

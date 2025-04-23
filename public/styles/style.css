@@ -185,3 +185,11 @@ footer {
     gap: 20px; /* Define um espaçamento entre os itens */
     padding: 10px; /* Espaço entre os botões */
 }
+
+.alinhamentoDeBusca{
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    display: flex;
+    gap: 20px; /* Define um espaçamento entre os itens */
+    padding: 10px; /* Espaço entre os botões */
+}
