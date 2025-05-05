@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Mangá</title>
+  <link rel="stylesheet" href="/public/styles/style.css">
+  <link rel="stylesheet" href="/public/styles/CardsDeManga.css">
+  <link rel="stylesheet" href="/public/styles/StyleDetalhe.css">
+</head>
+
+<body>
+
+  <!-- Cabeçalho da página -->
+  <!-- Cabeçalho principal -->
+  <header class="cabecalho">
+    <img src="/public/img/icon/iconedePagina.jpeg" alt="Ícone" class="icone">
+    ODISSEIA
+  </header>
+
+  <!-- Barra de navegação -->
+  <nav class="painelDeNavegacao">
+    <div class="menu">
+      <a href="mangas.html">MANGÁS</a> |
+      <a href="">CONTATO</a> |
+      <a href="">DOAÇÕES</a> |
+      <a href="/public/index.html">HOME</a> |
+      <a href="">DISCORD</a> |
+    </div>
+  </nav>
+
+  <!-- Barra de busca -->
+  <nav class="barraDeBusca">
+    <div class="containerBusca">
+      <input type="text" class="campoBusca" placeholder="Buscar..." />
+      <button class="botaoBusca">Buscar</button>
+    </div>
+  </nav>
+
+  <!-- Conteúdo principal -->
+  <main class="container">
+    <div id="detalhes-manga" class="container-detalhes">
+      <div class="estado-carregamento">
+        <p>Carregando informações do mangá...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Popup para visualização dos capítulos -->
+  <div id="popup-capitulo" class="overlay-popup">
+    <div class="conteudo-popup">
+      <button class="fechar-popup">&times;</button>
+      <img id="imagem-popup" class="imagem-popup" src="" alt="Capítulo do Mangá">
+      <div class="navegacao-popup">
+        <button id="capitulo-anterior" class="botao-popup" disabled>Anterior</button>
+        <button id="proximo-capitulo" class="botao-popup" disabled>Próximo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão flutuante -->
+  <a href="/public/login.html" class="botaoFlutuante"></a>
+
+  <!-- Rodapé -->
+  <footer class="rodape">
+    Victor Hugo (PUC-ADS)
+  </footer>
+
+  <script>
+    // Variáveis globais para controle do popup
+    let paginasAtuais = []; // Array de páginas do capítulo atual
+    let indicePaginaAtual = 0; // Índice da página sendo exibida
+    let numeroCapituloAtual = ""; // Número do capítulo atual como string
+
+    // Função para extrair o ID da URL
+    function obterIdMangaDaURL() {
+      const parametrosURL = new URLSearchParams(window.location.search);
+      return parametrosURL.get('id');
+    }
+
+    // Função para buscar os dados do mangá
+    async function buscarDetalhesManga(idManga) {
+      try {
+        const manga = listaDeMangas.find(item => item.id === idManga);
+        if (!manga) {
+          throw new Error('Mangá não encontrado');
+        }
+        // Simula um tempo de carregamento
+        await new Promise(resolve => setTimeout(resolve, 300));
+        return manga;
+      } catch (error) {
+        console.error('Erro ao buscar mangá:', error);
+        throw error;
+      }
+    }
+
+    // Função para renderizar os detalhes do mangá
+    function renderizarDetalhesManga(manga) {
+      const container = document.getElementById('detalhes-manga');
+      const capitulosOrdenados = [...(manga.capitulos || [])].sort((a, b) => a.numero - b.numero);
+
+      // Gera o HTML da lista de capítulos
+      const htmlCapitulos = capitulosOrdenados.length > 0
+        ? capitulosOrdenados.map(capitulo => `
+           <li class="item-capitulo" data-numero="${capitulo.numero}">
+             <span class="numero-capitulo">Cap. ${capitulo.numero}</span>
+             <span class="titulo-capitulo">${capitulo.titulo || ''}</span>
+             <span class="data-capitulo">${capitulo.data || ''}</span>
+           </li>
+         `).join('')
+        : '<p class="sem-capitulos">Nenhum capítulo disponível no momento</p>';
+
+      // Preenche o container com os detalhes do mangá
+      container.innerHTML = `
+       <div>
+         <div class="cabecalho-manga">
+           <div>
+             <img src="${manga.imagem}" alt="${manga.titulo}" class="capa-manga">
+           </div>
+           <div class="info-manga">
+             <h1 class="titulo-manga">${manga.titulo}</h1>
+             <div class="metadados-manga">
+               <span class="tag-metadado">${manga.lancamento || 'Ano desconhecido'}</span>
+               <span class="tag-metadado">${manga.tema || 'Gênero não especificado'}</span>
+               ${manga.destaque === 'sim' ? '<span class="tag-metadado">Destaque</span>' : ''}
+             </div>
+             <div class="descricao-manga">
+               ${manga.descricao || 'Descrição não disponível.'}
+             </div>
+             <button onclick="window.history.back()" class="botao-voltar">
+               ← Voltar para a lista
+             </button>
+           </div>
+         </div>
+         <div class="secao-capitulos">
+           <h2 class="titulo-capitulos">Capítulos</h2>
+           <ul class="lista-capitulos">
+             ${htmlCapitulos}
+           </ul>
+         </div>
+       </div>
+     `;
+
+      // Adiciona event listeners para os capítulos
+      document.querySelectorAll('.item-capitulo').forEach(item => {
+        item.addEventListener('click', function () {
+          const numeroCapitulo = this.getAttribute('data-numero');
+          abrirPopupCapitulo(capitulosOrdenados, numeroCapitulo);
+        });
+      });
+    }
+
+    // Função para abrir o popup do capítulo
+    function abrirPopupCapitulo(capitulos, numeroCapitulo) {
+      const popup = document.getElementById('popup-capitulo');
+      const imagemPopup = document.getElementById('imagem-popup');
+
+      // Encontra o capítulo (comparando como string)
+      const capitulo = capitulos.find(cap => cap.numero.toString() === numeroCapitulo.toString());
+
+      if (!capitulo || !capitulo.paginas || capitulo.paginas.length === 0) {
+        alert("Este capítulo não possui páginas cadastradas!");
+        return;
+      }
+
+      // Armazena as páginas e o número do capítulo
+      paginasAtuais = capitulo.paginas;
+      indicePaginaAtual = 0;
+      numeroCapituloAtual = capitulo.numero;
+
+      // Mostra a primeira página
+      imagemPopup.src = paginasAtuais[indicePaginaAtual];
+      imagemPopup.alt = `Página ${indicePaginaAtual + 1} - Cap. ${numeroCapituloAtual}`;
+
+      // Atualiza os botões
+      atualizarBotoesPagina();
+
+      // Mostra o popup
+      popup.classList.add('ativo');
+    }
+
+    // Função para navegar entre páginas
+    function navegarPagina(direcao) {
+      if (direcao === 'anterior' && indicePaginaAtual > 0) {
+        indicePaginaAtual--;
+      } else if (direcao === 'proximo' && indicePaginaAtual < paginasAtuais.length - 1) {
+        indicePaginaAtual++;
+      }
+
+      // Atualiza a imagem
+      const imagemPopup = document.getElementById('imagem-popup');
+      imagemPopup.src = paginasAtuais[indicePaginaAtual];
+      imagemPopup.alt = `Página ${indicePaginaAtual + 1} - Cap. ${numeroCapituloAtual}`;
+
+      // Atualiza os botões
+      atualizarBotoesPagina();
+    }
+
+    // Função para atualizar botões de navegação
+    function atualizarBotoesPagina() {
+      const botaoAnterior = document.getElementById('capitulo-anterior');
+      const botaoProximo = document.getElementById('proximo-capitulo');
+
+      botaoAnterior.disabled = indicePaginaAtual <= 0;
+      botaoProximo.disabled = indicePaginaAtual >= paginasAtuais.length - 1;
+    }
+
+    // Função para fechar o popup
+    function fecharPopupCapitulo() {
+      document.getElementById('popup-capitulo').classList.remove('ativo');
+    }
+
+    // Função para exibir mensagem de erro
+    function mostrarErro(mensagem) {
+      const container = document.getElementById('detalhes-manga');
+      container.innerHTML = `
+       <div class="estado-erro">
+         <p>${mensagem}</p>
+         <button onclick="window.history.back()" class="botao-voltar">
+           ← Voltar para a lista
+         </button>
+       </div>
+     `;
+    }
+
+    // Função principal que orquestra o carregamento
+    async function carregarDetalhesManga() {
+      const idManga = obterIdMangaDaURL();
+
+      if (!idManga) {
+        mostrarErro('ID do mangá não foi especificado na URL');
+        return;
+      }
+
+      try {
+        const manga = await buscarDetalhesManga(idManga);
+        renderizarDetalhesManga(manga);
+      } catch (error) {
+        mostrarErro(error.message || 'Erro ao carregar os detalhes do mangá');
+      }
+    }
+
+    // Configura os event listeners quando o DOM estiver carregado
+    document.addEventListener('DOMContentLoaded', () => {
+      carregarDetalhesManga();
+
+      // Fechar popup
+      document.querySelector('.fechar-popup').addEventListener('click', fecharPopupCapitulo);
+
+      // Navegação entre páginas
+      document.getElementById('capitulo-anterior').addEventListener('click', () => navegarPagina('anterior'));
+      document.getElementById('proximo-capitulo').addEventListener('click', () => navegarPagina('proximo'));
+
+      // Fechar popup ao clicar fora do conteúdo
+      document.getElementById('popup-capitulo').addEventListener('click', function (e) {
+        if (e.target === this) {
+          fecharPopupCapitulo();
+        }
+      });
+    });
+  </script>
+
+  <!-- Importa a lista de mangás do seu app.js -->
+  <script src="../Javascript/app.js"></script>
+</body>
+
+</html>

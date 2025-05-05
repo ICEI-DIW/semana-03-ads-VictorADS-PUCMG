@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odisseia</title>
+  <!-- Links para folhas de estilo -->
+  <link rel="stylesheet" href="/public/styles/style.css">
+  <link rel="stylesheet" href="/public/styles/CardsDeManga.css">
+</head>
+
+<body>
+  <!-- Cabeçalho da página -->
+  <header class="cabecalho">
+    <img src="/public/img/icon/iconedePagina.jpeg" alt="Ícone" class="icone">
+    ODISSEIA
+  </header>
+
+  <!-- Barra de navegação principal -->
+  <nav class="painelDeNavegacao">
+    <div class="menu">
+      <a href="mangas.html">MANGÁS</a> |
+      <a href="">CONTATO</a> |
+      <a href="">DOAÇÕES</a> |
+      <a href="/public/index.html">HOME</a> |
+      <a href="">DISCORD</a> |
+    </div>
+  </nav>
+
+  <!-- Barra de busca -->
+  <nav class="barraDeBusca">
+    <div class="containerBusca">
+      <input type="text" class="campoBusca" placeholder="Buscar..." />
+      <button class="botaoBusca">Buscar</button>
+    </div>
+  </nav>
+
+  <!-- Conteúdo principal: seções por gênero -->
+  <div class="containerPrincipal">
+
+    <!-- Seção de Terror -->
+    <section class="secaoGenero" id="terror">
+      <h2 class="tituloGenero">Terror</h2>
+      <div class="containerCarrossel">
+        <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrossel('terror', 'esquerda')">◀</button>
+        <div class="carrossel" id="carrossel-terror"></div>
+        <button class="botaoRolagem rolarDireita" onclick="rolarCarrossel('terror', 'direita')">▶</button>
+      </div>
+    </section>
+
+    <!-- Seção de Ficção Científica -->
+    <section class="secaoGenero" id="ficcao">
+      <h2 class="tituloGenero">Ficção Científica</h2>
+      <div class="containerCarrossel">
+        <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrossel('ficcao', 'esquerda')">◀</button>
+        <div class="carrossel" id="carrossel-ficcao"></div>
+        <button class="botaoRolagem rolarDireita" onclick="rolarCarrossel('ficcao', 'direita')">▶</button>
+      </div>
+    </section>
+
+    <!-- Seção de Romance -->
+    <section class="secaoGenero" id="romance">
+      <h2 class="tituloGenero">Romance</h2>
+      <div class="containerCarrossel">
+        <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrossel('romance', 'esquerda')">◀</button>
+        <div class="carrossel" id="carrossel-romance"></div>
+        <button class="botaoRolagem rolarDireita" onclick="rolarCarrossel('romance', 'direita')">▶</button>
+      </div>
+    </section>
+
+    <!-- Seção de Mistério -->
+    <section class="secaoGenero" id="misterio">
+      <h2 class="tituloGenero">Mistério</h2>
+      <div class="containerCarrossel">
+        <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrossel('misterio', 'esquerda')">◀</button>
+        <div class="carrossel" id="carrossel-misterio"></div>
+        <button class="botaoRolagem rolarDireita" onclick="rolarCarrossel('misterio', 'direita')">▶</button>
+      </div>
+    </section>
+
+    <!-- Seção de Drama -->
+    <section class="secaoGenero" id="drama">
+      <h2 class="tituloGenero">Drama</h2>
+      <div class="containerCarrossel">
+        <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrossel('drama', 'esquerda')">◀</button>
+        <div class="carrossel" id="carrossel-drama"></div>
+        <button class="botaoRolagem rolarDireita" onclick="rolarCarrossel('drama', 'direita')">▶</button>
+      </div>
+    </section>
+
+    <!-- Seção de Comédia -->
+    <section class="secaoGenero" id="comedia">
+      <h2 class="tituloGenero">Comédia</h2>
+      <div class="containerCarrossel">
+        <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrossel('comedia', 'esquerda')">◀</button>
+        <div class="carrossel" id="carrossel-comedia"></div>
+        <button class="botaoRolagem rolarDireita" onclick="rolarCarrossel('comedia', 'direita')">▶</button>
+      </div>
+    </section>
+
+    <!-- Seção de Aventura -->
+    <section class="secaoGenero" id="aventura">
+      <h2 class="tituloGenero">Aventura</h2>
+      <div class="containerCarrossel">
+        <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrossel('aventura', 'esquerda')">◀</button>
+        <div class="carrossel" id="carrossel-aventura"></div>
+        <button class="botaoRolagem rolarDireita" onclick="rolarCarrossel('aventura', 'direita')">▶</button>
+      </div>
+    </section>
+
+    <!-- Seção de Ação -->
+    <section class="secaoGenero" id="acao">
+      <h2 class="tituloGenero">Ação</h2>
+      <div class="containerCarrossel">
+        <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrossel('acao', 'esquerda')">◀</button>
+        <div class="carrossel" id="carrossel-acao"></div>
+        <button class="botaoRolagem rolarDireita" onclick="rolarCarrossel('acao', 'direita')">▶</button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Rodapé da página -->
+  <footer class="rodape">
+    <p>Victor Hugo (PUC-ADS)</p>
+  </footer>
+
+  <!-- Scripts JavaScript -->
+  <script>
+    // Objeto que mapeia os gêneros de mangá
+    const generos = {
+      terror: { id: 'carrossel-terror', tema: 'Terror' },
+      ficcao: { id: 'carrossel-ficcao', tema: 'Ficção Científica' },
+      romance: { id: 'carrossel-romance', tema: 'Romance' },
+      misterio: { id: 'carrossel-misterio', tema: 'Mistério' },
+      drama: { id: 'carrossel-drama', tema: 'Drama' },
+      comedia: { id: 'carrossel-comedia', tema: 'Comédia' },
+      aventura: { id: 'carrossel-aventura', tema: 'Aventura' },
+      acao: { id: 'carrossel-acao', tema: 'Ação' }
+    };
+  
+    // Função para carregar os carrosséis com os mangás filtrados por gênero
+    function carregarCarrosseis() {
+      Object.keys(generos).forEach(genero => {
+        const config = generos[genero];
+        const mangasFiltrados = listaDeMangas.filter(manga =>
+          manga.tema && manga.tema.toLowerCase() === config.tema.toLowerCase()
+        );
+  
+        const carrossel = document.getElementById(config.id);
+  
+        // Se não houver mangás, exibe mensagem
+        if (mangasFiltrados.length === 0) {
+          carrossel.innerHTML = `<div style="padding: 20px; text-align: center;">Nenhum mangá encontrado</div>`;
+          return;
+        }
+  
+        // Preenche o carrossel com os mangás filtrados
+        carrossel.innerHTML = mangasFiltrados.map(manga => `
+          <div class="cardManga" data-id="${manga.id}" onclick="abrirDetalhesManga('${manga.id}')">
+            <img src="${manga.imagem}" alt="${manga.titulo}" class="capaManga">
+            <div class="infoManga">
+              <h3 class="tituloManga">${manga.titulo}</h3>
+              <div class="detalhesManga">
+                <span>${manga.lancamento}</span>
+              </div>
+            </div>
+            <div class="infoHoverManga">
+              ${manga.descricao}
+            </div>
+          </div>
+        `).join('');
+        
+        // Ajusta a margem do último item do carrossel
+        const ultimoItem = carrossel.lastElementChild;
+        if (ultimoItem) {
+          ultimoItem.style.marginRight = '30px';
+        }
+      });
+    }
+  
+    // Função para rolar o carrossel horizontalmente
+    function rolarCarrossel(genero, direcao) {
+      const carrossel = document.getElementById(generos[genero].id);
+      const quantidadeRolagem = 300;
+  
+      carrossel.scrollBy({
+        left: direcao === 'esquerda' ? -quantidadeRolagem : quantidadeRolagem,
+        behavior: 'smooth'
+      });
+    }
+  
+    // Função para abrir a página de detalhes do mangá
+    function abrirDetalhesManga(idManga) {
+      // Verifica se o ID é válido
+      if (!idManga) {
+        console.error('ID do mangá não fornecido');
+        return;
+      }
+      
+      // Redireciona para a página de detalhes com o ID do mangá
+      window.location.href = `detalhes.html?id=${encodeURIComponent(idManga)}`;
+    }
+  
+    // Carrega os carrosséis quando a página estiver pronta
+    document.addEventListener('DOMContentLoaded', carregarCarrosseis);
+  </script>
+  
+  <!-- Link para o arquivo JavaScript principal -->
+  <script src="../Javascript/app.js"></script>
+
+  <!-- Botão flutuante para login -->
+  <a href="/public/login.html" class="botaoFlutuante"></a>
+
+</body>
+
+</html>

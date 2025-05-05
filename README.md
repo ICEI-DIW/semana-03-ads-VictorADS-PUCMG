@@ -13,16 +13,24 @@ Nessa atividade, você deverá montar a página inicial do projeto escolhido, a 
 - Proposta de projeto escolhida:  Biblioteca de mangas
 
 - Breve descrição sobre seu projeto:
-uma plataforma de mangas e historia em quadrinhos, podendo armazenar os mangas, serem avaliados com o tempo e com login serem favoritados para facilitar o acesso a coleção 
+uma plataforma de mangas e historia em quadrinhos,  deve haver uma galeria de mangas em destaque na tela inicial e uma espaço apra galeria de diferentes tipos de mangas
 
 ## Print do esboço criada
+![Tela inicial](public/img/Ideia/Inicial.png)
+![Tela Manga ](public/img/Ideia/GaleriaManga.jpeg.png)
+![Tela Login](public/img/Ideia/Login.png.png)
+![Tela Manga](public/img/Ideia/Manga.jpeg.png)
+![Tela popup](public/img/Ideia/Popup%20manga.jpeg.png)
 
-![Tela inicial](public/img/Ideia/1.png)
-![Tela de login](public/img/Ideia/2.png)
+
+
 
 
 ## Print da home-page criada
 
-![Tela inicial web](public/img/Tela/Inicial%201.png)
-![Tela inicial web](public/img/Tela/inicial%202.pngg)
-![Tela login web](public/img/Tela/login.png)
+![Tela inicial web](public/img/Tela/Atualização/Tela%20inicial%201.png.png)
+![Tela inicial web](public/img/Tela/Atualização/Tela%20Inicial%202.pngpngg)
+![Tela login web](public/img/Tela/Atualização/Login.png)
+![Tela galeria web](public/img/Tela/Atualização/galeria%20de%20manga.png)
+![Tela manga web](public/img/Tela/Atualização/Tela%20Manga.png)
+![Tela Atualização web](public/img/Tela/Atualização/Pop%20up.png)

@@ -2,36 +2,80 @@
 body {
     margin: 0;
     overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
 }
 
-/*cabeçalho Funcional do site ( Odiseia ate painel de busca)*/
+/* --- CABEÇALHO PRINCIPAL --- */
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: #a52a2a;
+    color: white;
+    padding: 10px 0;
+    width: 100%;
+}
 
-/* Estiliza o painel de botões no topo da página */
-.painelDeBotoes {
+.icone {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+/* --- BARRA DE NAVEGAÇÃO --- */
+/* --- BARRA DE NAVEGAÇÃO --- */
+.painelDeNavegacao {
     width: 100%;
     height: 60px;
     background-color: rgb(27, 27, 27);
 }
 
-/* Define a área da barra de busca */
-.busca {
-    width: 100%;
-    height: 60px;
-    background-color:  rgb(27, 27, 27);
+.menu,
+a {
+    text-decoration: none;
+    padding: 21px;
+    font-size: 18px;
+    text-align: center;
+    align-items: center;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-/* Estiliza o campo de busca */
-.inputBusca {
+
+.menu a:hover {
+    color: #a52a2a;
+}
+
+/* --- BARRA DE BUSCA --- */
+.barraDeBusca {
+    width: 100%;
+    background-color: rgb(27, 27, 27);
+    padding: 10px 0;
+}
+
+.containerBusca {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.campoBusca {
     border: none;
     outline: none;
     width: 40%;
-    padding: 10px;
+    max-width: 500px;
+    padding: 10px 15px;
     font-size: 16px;
     border-radius: 20px;
-    margin-right: 10px;
 }
 
-/* Estiliza o botão de busca */
+
+
 .botaoBusca {
     background-color: brown;
     color: white;
@@ -43,153 +87,188 @@ body {
     transition: background-color 0.3s;
 }
 
-/* Efeito ao passar o mouse sobre o botão de busca */
-.botaoBusca:hover { 
+.botaoBusca:hover {
     background-color: rgb(115, 14, 14);
 }
 
-/* Estiliza o menu e os links */
-.menu, a {
-    text-decoration: none;
-    padding: 21px;
-    font-size: 18px;
-    text-align: center;
-    align-items: center;
-    color: white;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+/* --- CONTEÚDO PRINCIPAL --- */
+.containerPrincipal {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Botão flutuante no canto inferior direito */
-.botao-flutuante {
-    position: fixed;
-    bottom: 20px;
-    right: 25px;
-    width: 30px;
-    height: 25px;
-    background-image: url('/public/img/icon/Nologin.jpg');
-    background-size: cover;  /* Faz a imagem cobrir toda a área */
-    background-repeat: no-repeat; /* Impede a repetição */
-    border-radius: 50%;
-    display: flex;
-    transition: transform 1.2s;
+.tituloGenero {
+    color: #e74c3c;
+    border-bottom: 2px solid #e74c3c;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    font-size: 24px;
 }
 
-
-/* Botão flutuante no canto inferior direito */
-.botao-flutuante:hover {
-
-    position: fixed;
-    bottom: 20px;
-    right: 25px;
-    width: 30px;
-    height: 25px;
-    background-image: url('/public/img/icon/Login.jpeg');
-    background-size: cover;  /* Faz a imagem cobrir toda a área */
-    background-repeat: no-repeat; /* Impede a repetição */
-    border-radius: 50%;
-    display: flex;
-    transition: transform 1.2s;
+/* --- CARROSSÉIS --- */
+.containerCarrossel {
+    position: relative;
+    margin: 0 30px;
 }
 
-/* Alinha o título e o ícone corretamente */
-.title {
+.carrossel {
     display: flex;
-    align-items: center; /* Centraliza o ícone e o texto verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
-    font-size: 28px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 15px 10px;
+    scrollbar-width: none;
+}
+
+.carrossel::-webkit-scrollbar {
+    display: none;
+}
+
+/* --- CARDS DE MANGÁ --- */
+.cardManga {
+    position: relative;
+    flex: 0 0 180px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.cardManga:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.capaManga {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.infoManga {
+    padding: 12px;
+}
+
+.tituloManga {
     font-weight: bold;
-    background-color: brown;
-    color: white;
-    padding: 2px;
-    width: 100%;
-    height: 40px; /* Define uma altura fixa para melhor alinhamento */
+    margin: 0 0 5px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Define o ícone circular */
-.icone {
-    width: 30px; /* Ajuste conforme necessário */
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 15px; /* Espaço entre o ícone e o texto */
-}
-
-/*Fim cabeçalho Funcional do site ( Odiseia ate painel de busca)*/
-
-
-/*Comandos de video*/
-/* Define o tamanho e a cor de fundo do vídeo em destaque */
-.videoEmDestaque {
-    width: 100%;
-    height: 540px;
-    background-image: url("/public/img/fundo.png");
-    background-size: cover;  /* Faz a imagem cobrir toda a área */
-    background-repeat: no-repeat; /* Impede a repetição */
-}
-
-/* Centraliza os vídeos dentro da seção */
-.Video {
+.detalhesManga {
     display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    padding: 25px;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #666;
 }
 
-
-/*Comandos de video*/
-
-
-/* Define a seção de mangás com altura e cor de fundo */
-.Manga {
-    width: 100%;
-    height: 480px;
-    background-color:  rgb(27, 27, 27);
-}
-
-/* Estiliza os botões da página */
-.mangaDestaque {
-    text-decoration: none;
-    width: 250px;
-    height: 350px;
+/* --- BOTÕES DE ROLAGEM --- */
+.botaoRolagem {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
     color: white;
-    font-size: 20px;
-    text-align: center;
-    line-height: 450px; /* Centraliza o texto verticalmente */
-    background-size: cover;  /* Faz a imagem cobrir toda a área */
-    background-repeat: no-repeat; /* Impede a repetição */
+    border: none;
+    width: 40px;
+    height: 60px;
     cursor: pointer;
-    border-radius: 20px;
-    transition: 0.3s;
+    z-index: 10;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background 0.3s;
 }
 
-/* Efeito ao passar o mouse sobre o botão */
-.mangaDestaque:hover {
-    width: 260px;
+.botaoRolagem:hover {
+    background: rgba(0, 0, 0, 0.9);
 }
 
-/*Fim dos comandos de video*/
+.rolarEsquerda {
+    left: -20px;
+}
 
-/* Estiliza o rodapé da página */
-footer {
+.rolarDireita {
+    right: -20px;
+}
+
+/* --- INFO HOVER --- */
+.infoHoverManga {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
     width: 100%;
-    height: 20px;
-    background-color:  brown;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    font-size: 0.8rem;
+    transition: bottom 0.3s ease;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.cardManga:hover .infoHoverManga {
+    bottom: 0;
+}
+
+/* --- RODAPÉ --- */
+.rodape {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #a52a2a;
     text-align: center;
-    color: aliceblue;
+    color: white;
+    font-size: 14px;
 }
 
-/* Centraliza os itens dentro da seção */
-.alinhamentoItem {
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    display: flex;
-    gap: 20px; /* Define um espaçamento entre os itens */
-    padding: 10px; /* Espaço entre os botões */
+/* --- BOTÃO FLUTUANTE --- */
+.botaoFlutuante {
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    width: 30px;
+    height: 30px;
+    background-image: url('/public/img/icon/Nologin.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.alinhamentoDeBusca{
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    display: flex;
-    gap: 20px; /* Define um espaçamento entre os itens */
-    padding: 10px; /* Espaço entre os botões */
+.botaoFlutuante:hover {
+    background-image: url('/public/img/icon/Login.jpeg');
+    transform: scale(1.1);
+}
+
+/* --- AJUSTES DE RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .menu {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .containerBusca {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .campoBusca {
+        width: 80%;
+    }
+
+    .botaoRolagem {
+        width: 30px;
+        height: 50px;
+    }
 }

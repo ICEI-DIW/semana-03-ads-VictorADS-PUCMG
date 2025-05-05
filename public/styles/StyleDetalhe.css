@@ -1,0 +1,231 @@
+ /* Estilos otimizados para a página de detalhes */
+
+    /* Container principal dos detalhes */
+    .container-detalhes {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #1e1e1e;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+  
+      /* Cabeçalho com capa e informações */
+      .cabecalho-manga {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+  
+      /* Estilo da capa do mangá */
+      .capa-manga {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+  
+      /* Área de informações do mangá */
+      .info-manga {
+        color: #fff;
+      }
+  
+      /* Título do mangá */
+      .titulo-manga {
+        color: #a52a2a;
+        margin: 0 0 1rem;
+        font-size: 2.5rem;
+      }
+  
+      /* Container de metadados (tags) */
+      .metadados-manga {
+        display: flex;
+        gap: 1rem;
+        margin: 1.5rem 0;
+        flex-wrap: wrap;
+      }
+  
+      /* Estilo das tags de metadados */
+      .tag-metadado {
+        background-color: #252525;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+      }
+  
+      /* Descrição do mangá */
+      .descricao-manga {
+        line-height: 1.7;
+        margin-bottom: 2rem;
+      }
+  
+      /* Seção de capítulos */
+      .secao-capitulos {
+        margin-top: 3rem;
+      }
+  
+      /* Título da seção de capítulos */
+      .titulo-capitulos {
+        color: #a52a2a;
+        border-bottom: 1px solid #333;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+  
+      /* Lista de capítulos */
+      .lista-capitulos {
+        color: #fff;
+        list-style: none;
+        padding: 0;
+      }
+  
+      /* Item individual de capítulo */
+      .item-capitulo {
+        display: grid;
+        grid-template-columns: 80px 1fr 120px;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #333;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+  
+      /* Efeito hover no item de capítulo */
+      .item-capitulo:hover {
+        background-color: #252525;
+      }
+  
+      /* Número do capítulo */
+      .numero-capitulo {
+        color: #a52a2a;
+        font-weight: bold;
+      }
+  
+      /* Data do capítulo */
+      .data-capitulo {
+        color: #aaa;
+        text-align: right;
+      }
+  
+      /* Botão de voltar */
+      .botao-voltar {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        padding: 0.75rem 1.5rem;
+        color: #a52a2a;
+        background-color: transparent;
+        border: 1px solid #a52a2a;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+  
+      /* Efeito hover no botão de voltar */
+      .botao-voltar:hover {
+        background-color: #a52a2a;
+        color: #121212;
+      }
+  
+      /* Estilos para o popup */
+  
+      /* Overlay do popup */
+      .overlay-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+      }
+  
+      /* Estado ativo do popup */
+      .overlay-popup.ativo {
+        opacity: 1;
+        visibility: visible;
+      }
+  
+      /* Conteúdo do popup */
+      .conteudo-popup {
+        position: relative;
+        max-width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        background-color: #1e1e1e;
+        border-radius: 8px;
+        padding: 20px;
+      }
+  
+      /* Imagem no popup */
+      .imagem-popup {
+        max-width: 100%;
+        max-height: 80vh;
+        display: block;
+        margin: 0 auto;
+      }
+  
+      /* Navegação do popup */
+      .navegacao-popup {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+  
+      /* Botões do popup */
+      .botao-popup {
+        padding: 8px 16px;
+        background-color: #a52a2a;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+  
+      /* Botão desabilitado */
+      .botao-popup:disabled {
+        background-color: #555;
+        cursor: not-allowed;
+      }
+  
+      /* Botão de fechar popup */
+      .fechar-popup {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        background: none;
+        border: none;
+        color: #a52a2a;
+        font-size: 24px;
+        cursor: pointer;
+      }
+  
+      /* Estilos responsivos */
+      @media (max-width: 768px) {
+  
+        /* Layout do cabeçalho em mobile */
+        .cabecalho-manga {
+          grid-template-columns: 1fr;
+        }
+  
+        /* Layout dos itens de capítulo em mobile */
+        .item-capitulo {
+          grid-template-columns: 60px 1fr;
+          grid-template-rows: auto auto;
+        }
+  
+        /* Posição da data em mobile */
+        .data-capitulo {
+          grid-column: 2;
+          text-align: left;
+        }
+      }
