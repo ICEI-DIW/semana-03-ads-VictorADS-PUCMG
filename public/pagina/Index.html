@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../img/icon/iconedePagina.jpeg">
+    <title>Odisseia</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/CardsDeManga.css">
+
+    <style>
+        /* Estilos adicionais para tratamento de erro */
+        .capaManga {
+            transition: opacity 0.3s ease;
+        }
+
+        .capaManga.error {
+            opacity: 0.7;
+            content: url('img/Mangas/01-Ação/01-Naruto/Capas/Capa-01.png');
+        }
+
+        .skeleton-card {
+            width: 200px;
+            height: 300px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Cabeçalho principal -->
+    <header class="cabecalho">
+        <img src="../img/icon/iconedePagina.jpeg" alt="Ícone" class="icone">
+        ODISSEIA
+    </header>
+
+    <!-- Barra de navegação -->
+    <nav class="painelDeNavegacao">
+        <div class="menu">
+            <a href="Mangas.html">MANGÁS</a> |
+            <a href="">CONTATO</a> |
+            <a href="">DOAÇÕES</a> |
+            <a href="index.html">HOME</a> |
+            <a href="">DISCORD</a> |
+        </div>
+    </nav>
+
+    <!-- Barra de busca -->
+    <nav class="barraDeBusca">
+        <div class="containerBusca">
+            <input type="text" class="campoBusca" placeholder="Buscar..." />
+            <button class="botaoBusca">Buscar</button>
+        </div>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <main class="containerPrincipal">
+        <!-- Vídeo em destaque -->
+        <div class="secaoGenero">
+            <div style="display: flex; justify-content: center; margin: 20px 0;">
+                <iframe width="940" height="500" src="https://www.youtube.com/embed/G0aIPjn9DR8?si=5KpCf_42gagFvmjs"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <!-- Seção de mangás em destaque -->
+            <section class="secaoGenero" id="destaque">
+                <h2 class="tituloGenero">Destaques</h2>
+                <div class="containerCarrossel">
+                    <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrosselDestaque('esquerda')">◀</button>
+                    <div class="carrossel" id="carrossel-destaque"></div>
+                    <button class="botaoRolagem rolarDireita" onclick="rolarCarrosselDestaque('direita')">▶</button>
+                </div>
+            </section>
+
+
+        </div>
+    </main>
+
+    <!-- Botão flutuante -->
+    <a href="Login.html" class="botaoFlutuante"></a>
+
+    <!-- Rodapé -->
+    <footer class="rodape">
+        Victor Hugo (PUC-ADS)
+    </footer>
+
+    <script src="../Javascript/app.js"></script>
+    <script>
+
+      // Função para carregar o carrossel com mangás em destaque
+function carregarCarrosselDestaque() {
+  // Filtra apenas os mangás que possuem destaque = "sim"
+  const mangasDestaque = listaDeMangas.filter(manga =>
+    manga.destaque && manga.destaque.toLowerCase() === "sim"
+  );
+
+  // Obtém o elemento do carrossel
+  const carrossel = document.getElementById('carrossel-destaque');
+
+  // Verificação de segurança
+  if (!carrossel) {
+    console.error("Elemento do carrossel de destaque não encontrado.");
+    return;
+  }
+
+  // Se não houver mangás em destaque
+  if (mangasDestaque.length === 0) {
+    carrossel.innerHTML = `<div style="padding: 20px; text-align: center;">Nenhum mangá em destaque</div>`;
+    return;
+  }
+
+  // Geração do HTML dos cards
+  carrossel.innerHTML = mangasDestaque.map(manga => `
+    <div class="cardManga" data-id="${manga.id}" onclick="abrirDetalhesManga('${manga.id}')">
+      <img src="${manga.imagem}" alt="${manga.titulo}" class="capaManga">
+      <div class="infoManga">
+        <h3 class="tituloManga">${manga.titulo}</h3>
+        <div class="detalhesManga">
+          <span>${manga.lancamento}</span>
+        </div>
+      </div>
+      <div class="infoHoverManga">
+        ${manga.descricao}
+      </div>
+    </div>
+  `).join('');
+
+  // Ajusta a margem do último item do carrossel
+  const ultimoItem = carrossel.lastElementChild;
+  if (ultimoItem) {
+    ultimoItem.style.marginRight = '30px';
+  }
+}
+
+// Função para rolar o carrossel de destaques
+function rolarCarrosselDestaque(direcao) {
+  const carrossel = document.getElementById('carrossel-destaque');
+  const quantidadeRolagem = 300;
+
+  carrossel.scrollBy({
+    left: direcao === 'esquerda' ? -quantidadeRolagem : quantidadeRolagem,
+    behavior: 'smooth'
+  });
+}
+
+// Função reutilizada para abrir os detalhes do mangá
+function abrirDetalhesManga(idManga) {
+  if (!idManga) {
+    console.error('ID do mangá não fornecido');
+    return;
+  }
+
+  window.location.href = `detalhes.html?id=${encodeURIComponent(idManga)}`;
+}
+
+// Gatilho ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+  carregarCarrosselDestaque();
+});
+
+
+        /*
+       // Versão otimizada do script para carrossel de destaques
+document.addEventListener('DOMContentLoaded', function() {
+    // Configurações
+    const FALLBACK_IMAGE = 'img/placeholder.jpg';
+    const SCROLL_AMOUNT = 300;
+    const LOADING_SKELETONS = 4;
+    
+    // Elementos DOM
+    const carrossel = document.getElementById('carrossel-destaque');
+    
+    // Função para verificar se a imagem carregou
+    async function verificarImagem(imgElement) {
+        return new Promise((resolve) => {
+            if (imgElement.complete) {
+                resolve(imgElement.naturalHeight !== 0);
+                return;
+            }
+
+            const timer = setTimeout(() => {
+                imgElement.onload = null;
+                imgElement.onerror = null;
+                resolve(imgElement.naturalHeight !== 0);
+            }, 2000);
+
+            imgElement.onload = () => {
+                clearTimeout(timer);
+                resolve(true);
+            };
+            
+            imgElement.onerror = () => {
+                clearTimeout(timer);
+                resolve(false);
+            };
+        });
+    }
+
+    // Função para criar cards de mangá
+    function criarCardManga(manga) {
+        const card = document.createElement('div');
+        card.className = 'cardManga';
+        card.onclick = () => window.location.href = `pagina/detalhes.html?id=${manga.id}`;
+        
+        card.innerHTML = `
+            <img src="${manga.imagem}" alt="${manga.titulo}" class="capaManga"
+                 loading="lazy" onerror="this.classList.add('error'); this.src='${FALLBACK_IMAGE}'">
+            <div class="infoManga">
+                <h3 class="tituloManga">${manga.titulo}</h3>
+                <div class="detalhesManga">
+                    <span>${manga.lancamento}</span>
+                    <span>• ${manga.tema}</span>
+                </div>
+            </div>
+            <div class="infoHoverManga">
+                <p>${manga.descricao || 'Descrição não disponível'}</p>
+            </div>
+        `;
+        
+        return card;
+    }
+
+    // Função principal para carregar os destaques
+    async function carregarDestaques() {
+        // Mostrar estado de carregamento
+        carrossel.innerHTML = Array(LOADING_SKELETONS).fill()
+            .map(() => `<div class="skeleton-card"></div>`)
+            .join('');
+
+        try {
+            // Verificar se listaDeMangas está disponível
+            if (typeof listaDeMangas === 'undefined') {
+                throw new Error('Dados não carregados');
+            }
+
+            // Filtrar mangás em destaque
+            const mangasDestaque = listaDeMangas.filter(manga =>
+                manga.destaque && String(manga.destaque).toLowerCase() === "sim"
+            );
+
+            if (mangasDestaque.length === 0) {
+                carrossel.innerHTML = '<p class="mensagem-erro">Nenhum mangá em destaque</p>';
+                return;
+            }
+
+            // Limpar carrossel
+            carrossel.innerHTML = '';
+            
+            // Criar e adicionar cards
+            for (const manga of mangasDestaque) {
+                const card = criarCardManga(manga);
+                carrossel.appendChild(card);
+                
+                // Verificar a imagem após a renderização
+                const img = card.querySelector('.capaManga');
+                const carregou = await verificarImagem(img);
+                if (!carregou) {
+                    img.classList.add('error');
+                    img.src = FALLBACK_IMAGE;
+                }
+            }
+
+            // Adicionar margem no último item
+            if (carrossel.lastElementChild) {
+                carrossel.lastElementChild.style.marginRight = '30px';
+            }
+
+        } catch (error) {
+            console.error('Erro ao carregar destaques:', error);
+            carrossel.innerHTML = '<p class="mensagem-erro">Erro ao carregar conteúdo. Por favor, recarregue a página.</p>';
+        }
+    }
+
+    // Função para rolar o carrossel
+    function scrollDestaques(direction) {
+        carrossel.scrollBy({
+            left: direction === 'left' ? -SCROLL_AMOUNT : SCROLL_AMOUNT,
+            behavior: 'smooth'
+        });
+    }
+
+    // Inicialização
+    carregarDestaques();
+    window.scrollDestaques = scrollDestaques;
+});
+*/
+    </script>
+
+
+
+</body>
+
+</html>

@@ -237,7 +237,7 @@ a {
     right: 25px;
     width: 30px;
     height: 30px;
-    background-image: url('/public/img/icon/Nologin.jpg');
+    background-image: url('../img/icon/Nologin.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 50%;
@@ -247,7 +247,7 @@ a {
 }
 
 .botaoFlutuante:hover {
-    background-image: url('/public/img/icon/Login.jpeg');
+    background-image: url('../img/icon/Login.jpeg');
     transform: scale(1.1);
 }
 
