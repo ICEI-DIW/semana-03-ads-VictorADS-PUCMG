@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <!-- Meta tags para configuração básica do documento -->
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../img/icon/iconedePagina.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <!-- Link para o arquivo CSS de estilos da página de login -->
     <link rel="stylesheet" href="../styles/login.css">
 </head>
+
 <body>
     <!-- Container principal do formulário de login -->
     <div class="caixaLogin">
         <!-- Ícone do usuário -->
         <img src="../img/icon/iconedePagina.jpeg" alt="Ícone do usuário" class="iconeUsuario">
-        
+
         <!-- Título da página -->
         <h2>LOGIN</h2>
-        
+
         <!-- Formulário de login com validação onSubmit -->
         <form onsubmit="fazerLogin(event)">
             <!-- Campo de entrada para e-mail -->
             <input type="email" id="email" placeholder="Gmail" required>
-            
+
             <!-- Campo de entrada para senha -->
             <input type="password" id="senha" placeholder="Senha" required>
-            
+
             <!-- Botão de submissão do formulário -->
             <button type="submit" class="botaoLogin">Entrar</button>
         </form>
-        
+
         <!-- Container para botões adicionais -->
         <div class="caixaBotaoExtra">
             <!-- Botão para recuperação de senha -->
             <button class="botaoExtra">Esqueci a senha</button>
-            
+
             <!-- Botão para criação de nova conta -->
             <button class="botaoExtra">Criar conta</button>
         </div>
@@ -42,4 +45,5 @@
     <!-- Script JavaScript para funcionalidade de login -->
     <script src="../scripts/login.js"></script>
 </body>
+
 </html>

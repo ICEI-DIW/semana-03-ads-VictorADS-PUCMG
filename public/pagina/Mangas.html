@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="../img/icon/iconedePagina.jpeg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odisseia</title>
   <!-- Links para folhas de estilo -->
@@ -36,7 +37,7 @@
     </div>
   </nav>
 
-   <a href="login.html" class="botaoFlutuante"></a><!--Botão flutuante-->
+  <a href="login.html" class="botaoFlutuante"></a><!--Botão flutuante-->
 
   <!-- Conteúdo principal: seções por gênero -->
   <div class="containerPrincipal">
@@ -141,7 +142,7 @@
       aventura: { id: 'carrossel-aventura', tema: 'Aventura' },
       acao: { id: 'carrossel-acao', tema: 'Ação' }
     };
-  
+
     // Função para carregar os carrosséis com os mangás filtrados por gênero
     function carregarCarrosseis() {
       Object.keys(generos).forEach(genero => {
@@ -149,15 +150,15 @@
         const mangasFiltrados = listaDeMangas.filter(manga =>
           manga.tema && manga.tema.toLowerCase() === config.tema.toLowerCase()
         );
-  
+
         const carrossel = document.getElementById(config.id);
-  
+
         // Se não houver mangás, exibe mensagem
         if (mangasFiltrados.length === 0) {
           carrossel.innerHTML = `<div style="padding: 20px; text-align: center;">Nenhum mangá encontrado</div>`;
           return;
         }
-  
+
         // Preenche o carrossel com os mangás filtrados
         carrossel.innerHTML = mangasFiltrados.map(manga => `
           <div class="cardManga" data-id="${manga.id}" onclick="abrirDetalhesManga('${manga.id}')">
@@ -173,7 +174,7 @@
             </div>
           </div>
         `).join('');
-        
+
         // Ajusta a margem do último item do carrossel
         const ultimoItem = carrossel.lastElementChild;
         if (ultimoItem) {
@@ -181,18 +182,18 @@
         }
       });
     }
-  
+
     // Função para rolar o carrossel horizontalmente
     function rolarCarrossel(genero, direcao) {
       const carrossel = document.getElementById(generos[genero].id);
       const quantidadeRolagem = 300;
-  
+
       carrossel.scrollBy({
         left: direcao === 'esquerda' ? -quantidadeRolagem : quantidadeRolagem,
         behavior: 'smooth'
       });
     }
-  
+
     // Função para abrir a página de detalhes do mangá
     function abrirDetalhesManga(idManga) {
       // Verifica se o ID é válido
@@ -200,20 +201,20 @@
         console.error('ID do mangá não fornecido');
         return;
       }
-      
+
       // Redireciona para a página de detalhes com o ID do mangá
       window.location.href = `detalhes.html?id=${encodeURIComponent(idManga)}`;
     }
-  
+
     // Carrega os carrosséis quando a página estiver pronta
     document.addEventListener('DOMContentLoaded', carregarCarrosseis);
   </script>
-  
+
   <!-- Link para o arquivo JavaScript principal -->
-  
+
   <script src="../Javascript/app.js"></script>
   <!-- Botão flutuante para login -->
- 
+
 </body>
 
 </html>
