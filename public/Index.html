@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="img/icon/iconedePagina.jpeg">
+    <title>Odisseia</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/CardsDeManga.css">
+
+    <style>
+        .capaManga {
+            transition: opacity 0.3s ease;
+        }
+
+        .capaManga.error {
+            opacity: 0.7;
+            content: url('img/Mangas/01-Ação/01-Naruto/Capas/Capa-01.png');
+        }
+
+        .skeleton-card {
+            width: 200px;
+            height: 300px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Cabeçalho principal -->
+    <header class="cabecalho">
+        <img src="img/icon/iconedePagina.jpeg" alt="Ícone" class="icone">
+        ODISSEIA
+    </header>
+
+    <!-- Barra de navegação -->
+    <nav class="painelDeNavegacao">
+        <div class="menu">
+            <a href="/public/pagina/Mangas.html">MANGÁS</a> |
+            <a href="">CONTATO</a> |
+            <a href="">DOAÇÕES</a> |
+            <a href="index.html">HOME</a> |
+            <a href="">DISCORD</a> |
+        </div>
+    </nav>
+
+    <!-- Barra de busca -->
+    <nav class="barraDeBusca">
+        <div class="containerBusca">
+            <input type="text" class="campoBusca" placeholder="Buscar..." />
+            <button class="botaoBusca">Buscar</button>
+        </div>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <main class="containerPrincipal">
+        <div class="secaoGenero">
+            <div style="display: flex; justify-content: center; margin: 20px 0;">
+                <iframe width="940" height="500" src="https://www.youtube.com/embed/G0aIPjn9DR8?si=5KpCf_42gagFvmjs"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <section class="secaoGenero" id="destaque">
+                <h2 class="tituloGenero">Destaques</h2>
+                <div class="containerCarrossel">
+                    <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrosselDestaque('esquerda')">◀</button>
+                    <div class="carrossel" id="carrossel-destaque"></div>
+                    <button class="botaoRolagem rolarDireita" onclick="rolarCarrosselDestaque('direita')">▶</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Botão flutuante -->
+    <a href="/public/pagina/login.html" class="botaoFlutuante"></a>
+
+    <!-- Rodapé -->
+    <footer class="rodape">
+        Victor Hugo (PUC-ADS)
+    </footer>
+
+    <script>
+        let listaDeMangas = [];
+
+        fetch('Javascript/app.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar JSON: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                listaDeMangas = data;
+                carregarCarrosselDestaque();
+            })
+            .catch(error => {
+                console.error('Erro ao buscar os mangás:', error);
+                const carrossel = document.getElementById('carrossel-destaque');
+                if (carrossel) {
+                    carrossel.innerHTML = '<p class="mensagem-erro">Erro ao carregar os mangás. Tente novamente.</p>';
+                }
+            });
+
+        function carregarCarrosselDestaque() {
+            const mangasDestaque = listaDeMangas.filter(manga =>
+                manga.destaque && manga.destaque.toLowerCase() === "sim"
+            );
+
+            const carrossel = document.getElementById('carrossel-destaque');
+
+            if (!carrossel) {
+                console.error("Elemento do carrossel de destaque não encontrado.");
+                return;
+            }
+
+            if (mangasDestaque.length === 0) {
+                carrossel.innerHTML = `<div style="padding: 20px; text-align: center;">Nenhum mangá em destaque</div>`;
+                return;
+            }
+
+            carrossel.innerHTML = mangasDestaque.map(manga => `
+                <div class="cardManga" data-id="${manga.id}" onclick="abrirDetalhesManga('${manga.id}')">
+                    <img src="${manga.imagem}" alt="${manga.titulo}" class="capaManga">
+                    <div class="infoManga">
+                        <h3 class="tituloManga">${manga.titulo}</h3>
+                        <div class="detalhesManga">
+                            <span>${manga.lancamento}</span>
+                        </div>
+                    </div>
+                    <div class="infoHoverManga">${manga.descricao}</div>
+                </div>
+            `).join('');
+
+            const ultimoItem = carrossel.lastElementChild;
+            if (ultimoItem) {
+                ultimoItem.style.marginRight = '30px';
+            }
+        }
+
+        function abrirDetalhesManga(idManga) {
+            window.location.href = `/public/pagina/detalhes.html?id=${encodeURIComponent(idManga)}`;
+        }
+
+
+        // ✅ Função adicionada para botões de rolagem funcionarem
+        function rolarCarrosselDestaque(direcao) {
+            const carrossel = document.getElementById('carrossel-destaque');
+            const scrollAmount = 300;
+            carrossel.scrollBy({
+                left: direcao === 'esquerda' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+
+</html>

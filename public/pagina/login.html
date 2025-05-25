@@ -42,8 +42,47 @@
         </div>
     </div>
 
-    <!-- Script JavaScript para funcionalidade de login -->
-    <script src="../scripts/login.js"></script>
+    
+    <script>
+
+        let usuarios = [];
+
+        // Carrega o JSON dos usuários no início
+        fetch('../path/login.json')  // ajuste o caminho conforme sua estrutura
+            .then(response => {
+                if (!response.ok) throw new Error('Erro ao carregar dados dos usuários');
+                return response.json();
+            })
+            .then(data => {
+                usuarios = data;
+                console.log('Usuários carregados:', usuarios);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Não foi possível carregar os dados de login. Tente novamente mais tarde.');
+            });
+
+        function fazerLogin(event) {
+            event.preventDefault(); // evita recarregar a página
+
+            const email = document.getElementById("email").value.trim();
+            const senha = document.getElementById("senha").value.trim();
+
+            if (usuarios.length === 0) {
+                alert('Dados dos usuários ainda não foram carregados. Por favor, aguarde alguns segundos e tente novamente.');
+                return;
+            }
+
+            const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+
+            if (usuario) {
+                alert(`Bem-vindo, ${usuario.nome}!`);
+                window.location.href = "index.html"; // página destino após login
+            } else {
+                alert("Email ou senha incorretos!");
+            }
+        }
+    </script>
 </body>
 
 </html>
