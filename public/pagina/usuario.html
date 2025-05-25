@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="img/icon/iconedePagina.jpeg" />
+  <title>Odisseia - Usuário</title>
+  <!-- Styles principais -->
+  <link rel="stylesheet" href="/public/styles/style.css" />
+  <link rel="stylesheet" href="/public/styles/CardsDeManga.css" />
+
+  <style>
+    /* Animação de carregamento (skeleton) */
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50%      { opacity: 1;   }
+    }
+
+    /* Saudação personalizada */
+    #saudacao {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 20px 0 10px 0;
+      text-align: center;
+    }
+
+    /* Botão de logout */
+    #btnLogout {
+      display: block;
+      margin: 0 auto 30px auto;
+      padding: 8px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      background-color: brown;
+      color: white;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    #btnLogout:hover {
+      background-color: rgb(115, 14, 14);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Cabeçalho principal -->
+  <header class="cabecalho">
+    <img src="../img/icon/iconedePagina.jpeg" alt="Ícone" class="icone" />
+    ODISSEIA
+  </header>
+
+  <!-- Menu de navegação -->
+  <nav class="painelDeNavegacao">
+    <div class="menu">
+      <a href="mangas.html">MANGÁS</a> |
+      <a href="">CONTATO</a> |
+      <a href="">DOAÇÕES</a> |
+      <a href="../Index.html">HOME</a> |
+      <a href="">DISCORD</a>
+    </div>
+  </nav>
+
+  <!-- Conteúdo principal -->
+  <main class="containerPrincipal">
+
+    <!-- Saudação ao usuário -->
+    <div id="saudacao">Bem-vindo!</div>
+
+    <!-- Botão de logout -->
+    <button id="btnLogout">Sair</button>
+
+    <!-- Seção com o carrossel dos mangás do usuário -->
+    <section class="secaoGenero" id="mangasDoUsuario">
+      <h2 class="tituloGenero">Seus Mangás</h2>
+      <div class="containerCarrossel">
+        <!-- Botões de rolagem esquerda/direita -->
+        <button class="botaoRolagem rolarEsquerda" onclick="rolarCarrossel('esquerda')">◀</button>
+        <div class="carrossel" id="carrossel-usuario"></div>
+        <button class="botaoRolagem rolarDireita" onclick="rolarCarrossel('direita')">▶</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé fixo -->
+  <footer class="rodape">
+    Victor Hugo (PUC-ADS)
+  </footer>
+
+  <script>
+    // 1. Recupera o objeto do usuário logado (salvo em login.html)
+    const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+
+    // 2. Se não existir, força redirecionamento para a página de login
+    if (!usuarioLogado) {
+      alert('Faça login primeiro');
+      window.location.href = 'login.html';
+    } else {
+      // 3. Atualiza a saudação com o nome do usuário
+      document.getElementById('saudacao').textContent = `Bem-vindo, ${usuarioLogado.nome}!`;
+    }
+
+    // 4. Array que armazenará todos os mangás do JSON
+    let listaDeMangas = [];
+
+    // 5. Carrega o JSON com os mangás via fetch
+    fetch('../Javascript/app.json')
+      .then(resp => {
+        if (!resp.ok) throw new Error('Erro ao carregar mangás');
+        return resp.json();
+      })
+      .then(data => {
+        listaDeMangas = data;
+        carregarCarrosselUsuario(); // 6. Monta o carrossel após o carregamento
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('carrossel-usuario').innerHTML =
+          '<p class="mensagem-erro">Erro ao carregar seus mangás.</p>';
+      });
+
+    /**
+     * 6. Função que filtra e exibe apenas os mangás do usuário
+     */
+    function carregarCarrosselUsuario() {
+      const carrossel = document.getElementById('carrossel-usuario');
+
+      // Verifica se o usuário possui algum ID de mangá
+      if (!Array.isArray(usuarioLogado.mangas) || usuarioLogado.mangas.length === 0) {
+        carrossel.innerHTML = '<p>Você não possui mangás cadastrados.</p>';
+        return;
+      }
+
+      // Normaliza todos os IDs como string
+      const meusIds = usuarioLogado.mangas.map(String);
+
+      // Filtra a lista completa de mangás para obter apenas os do usuário
+      const mangasDoUsuario = listaDeMangas.filter(m => meusIds.includes(String(m.id)));
+
+      // Se não encontrar nenhum, exibe mensagem
+      if (mangasDoUsuario.length === 0) {
+        carrossel.innerHTML = '<p>Nenhum mangá encontrado para o seu perfil.</p>';
+        return;
+      }
+
+      // Constrói o HTML dos cards dentro do carrossel
+      carrossel.innerHTML = mangasDoUsuario.map(m => `
+        <div class="cardManga"
+             data-id="${m.id}"
+             onclick="abrirDetalhesManga('${encodeURIComponent(m.id)}')">
+          <img src="${m.imagem}"
+               alt="${m.titulo}"
+               class="capaManga"
+               onerror="this.classList.add('error')" />
+          <div class="infoManga">
+            <h3 class="tituloManga">${m.titulo}</h3>
+            <div class="detalhesManga"><span>${m.lancamento}</span></div>
+          </div>
+          <div class="infoHoverManga">${m.descricao}</div>
+        </div>
+      `).join('');
+
+      // Ajuste visual: adiciona margem ao último card
+      const ultimo = carrossel.lastElementChild;
+      if (ultimo) ultimo.style.marginRight = '30px';
+    }
+
+    /**
+     * 7. Navega para a página de detalhes do mangá,
+     *    passando o ID pela query string
+     */
+    function abrirDetalhesManga(id) {
+      window.location.href = `detalhes.html?id=${id}`;
+    }
+
+    /**
+     * 8. Controla a rolagem do carrossel
+     */
+    function rolarCarrossel(dir) {
+      const c = document.getElementById('carrossel-usuario');
+      const amount = 300;
+      c.scrollBy({ left: dir === 'esquerda' ? -amount : amount, behavior: 'smooth' });
+    }
+
+    /**
+     * 9. Logout: remove dados do localStorage e volta ao login
+     */
+    document.getElementById('btnLogout').onclick = () => {
+      localStorage.removeItem('usuarioLogado');
+      window.location.href = 'login.html';
+    };
+  </script>
+</body>
+</html>

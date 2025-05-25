@@ -91,6 +91,106 @@ a {
     background-color: rgb(115, 14, 14);
 }
 
+/* --- SUGESTÂO DE BUSCA    ---*/
+
+.containerBusca {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    /* essencial para posicionamento absoluto da lista */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.sugestoes-lista {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    /* para acompanhar o containerBusca */
+    margin-top: 5px;
+    padding: 0;
+    list-style: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    box-sizing: border-box;
+    border-radius: 0 0 10px 10px;
+    font-family: inherit;
+    z-index: 1000;
+}
+
+
+
+.campoBusca {
+    flex: 0 0 70%;
+    max-width: 400px;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 20px;
+    font-family: inherit;
+}
+
+.botaoBusca {
+    flex: 0 0 auto;
+    background-color: brown;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: inherit;
+}
+
+.botaoBusca:hover {
+    background-color: rgb(115, 14, 14);
+}
+
+.sugestoes-lista {
+    background-color: rgb(27, 27, 27);
+    color: white;
+    /* demais propriedades continuam iguais */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 5px;
+    padding: 0;
+    border: none;
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+
+    font-family: inherit;
+    z-index: 1000;
+}
+
+.sugestao-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+.sugestao-item:hover {
+    background-color: #a52a2a;
+    color: white;
+}
+
 /* --- CONTEÚDO PRINCIPAL --- */
 .containerPrincipal {
     max-width: 1200px;

@@ -2,87 +2,98 @@
 <html lang="pt-br">
 
 <head>
-    <!-- Meta tags para configuração básica do documento -->
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="../img/icon/iconedePagina.jpeg">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- Link para o arquivo CSS de estilos da página de login -->
-    <link rel="stylesheet" href="../styles/login.css">
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="../img/icon/iconedePagina.jpeg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="../styles/login.css">
 </head>
 
 <body>
-    <!-- Container principal do formulário de login -->
-    <div class="caixaLogin">
-        <!-- Ícone do usuário -->
-        <img src="../img/icon/iconedePagina.jpeg" alt="Ícone do usuário" class="iconeUsuario">
+  <!-- Container principal do formulário de login -->
+  <div class="caixaLogin">
+    <!-- Ícone do usuário -->
+    <img src="../img/icon/iconedePagina.jpeg" alt="Ícone do usuário" class="iconeUsuario">
+    <!-- Título da página -->
+    <h2>LOGIN</h2>
 
-        <!-- Título da página -->
-        <h2>LOGIN</h2>
+    <!-- Formulário de login -->
+    <!-- onsubmit impede o reload e chama fazerLogin -->
+    <form onsubmit="fazerLogin(event)">
+      <!-- Campo de e-mail -->
+      <input type="email" id="email" placeholder="Gmail" required>
+      <!-- Campo de senha -->
+      <input type="password" id="senha" placeholder="Senha" required>
+      <!-- Botão de login, inicialmente desabilitado até o JSON carregar -->
+      <button type="submit" class="botaoLogin" id="botaoLogin" disabled>
+        Entrar
+      </button>
+    </form>
 
-        <!-- Formulário de login com validação onSubmit -->
-        <form onsubmit="fazerLogin(event)">
-            <!-- Campo de entrada para e-mail -->
-            <input type="email" id="email" placeholder="Gmail" required>
-
-            <!-- Campo de entrada para senha -->
-            <input type="password" id="senha" placeholder="Senha" required>
-
-            <!-- Botão de submissão do formulário -->
-            <button type="submit" class="botaoLogin">Entrar</button>
-        </form>
-
-        <!-- Container para botões adicionais -->
-        <div class="caixaBotaoExtra">
-            <!-- Botão para recuperação de senha -->
-            <button class="botaoExtra">Esqueci a senha</button>
-
-            <!-- Botão para criação de nova conta -->
-            <button class="botaoExtra">Criar conta</button>
-        </div>
+    <!-- Botões extras -->
+    <div class="caixaBotaoExtra">
+      <button class="botaoExtra">Esqueci a senha</button>
+      <button class="botaoExtra">Criar conta</button>
     </div>
+  </div>
 
-    
-    <script>
+  <script>
+    // Array que receberá os usuários do JSON
+    let usuarios = [];
 
-        let usuarios = [];
-
-        // Carrega o JSON dos usuários no início
-        fetch('../path/login.json')  // ajuste o caminho conforme sua estrutura
-            .then(response => {
-                if (!response.ok) throw new Error('Erro ao carregar dados dos usuários');
-                return response.json();
-            })
-            .then(data => {
-                usuarios = data;
-                console.log('Usuários carregados:', usuarios);
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert('Não foi possível carregar os dados de login. Tente novamente mais tarde.');
-            });
-
-        function fazerLogin(event) {
-            event.preventDefault(); // evita recarregar a página
-
-            const email = document.getElementById("email").value.trim();
-            const senha = document.getElementById("senha").value.trim();
-
-            if (usuarios.length === 0) {
-                alert('Dados dos usuários ainda não foram carregados. Por favor, aguarde alguns segundos e tente novamente.');
-                return;
-            }
-
-            const usuario = usuarios.find(u => u.email === email && u.senha === senha);
-
-            if (usuario) {
-                alert(`Bem-vindo, ${usuario.nome}!`);
-                window.location.href = "index.html"; // página destino após login
-            } else {
-                alert("Email ou senha incorretos!");
-            }
+    // Carrega o JSON de usuários assim que o script roda
+    fetch('../javascript/login.json')
+      .then(response => {
+        // Se houve erro no fetch, lança exceção
+        if (!response.ok) {
+          throw new Error('Erro ao carregar dados dos usuários');
         }
-    </script>
+        return response.json();
+      })
+      .then(data => {
+        // Salva no array e habilita o botão de login
+        usuarios = data;
+        console.log('Usuários carregados:', usuarios);
+        document.getElementById("botaoLogin").disabled = false;
+      })
+      .catch(error => {
+        // Em caso de falha, mostra alerta
+        console.error('Erro ao carregar usuários:', error);
+        alert('Não foi possível carregar os dados de login. Tente novamente mais tarde.');
+      });
+
+    /**
+     * Função chamada ao submeter o formulário de login.
+     * @param {Event} event - O evento de submit do formulário
+     */
+    function fazerLogin(event) {
+      // Impede comportamento padrão (recarregar a página)
+      event.preventDefault();
+
+      // Lê valores dos campos
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value.trim();
+
+      // Se o array de usuários ainda não foi preenchido, avisa o usuário
+      if (usuarios.length === 0) {
+        alert('Os dados dos usuários ainda não foram carregados. Aguarde um momento.');
+        return;
+      }
+
+      // Procura usuário cujo email e senha batem
+      const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+
+      if (usuario) {
+        // Se encontrado, salva no localStorage e redireciona
+        alert(`Bem-vindo, ${usuario.nome}!`);
+        localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
+        window.location.href = "usuario.html";
+      } else {
+        // Se não, mostra erro
+        alert("Email ou senha incorretos!");
+      }
+    }
+  </script>
 </body>
 
 </html>

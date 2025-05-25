@@ -55,17 +55,21 @@
             <a href="">CONTATO</a> |
             <a href="">DOAÇÕES</a> |
             <a href="index.html">HOME</a> |
-            <a href="">DISCORD</a> |
+            <a href="">DISCORD</a> 
         </div>
     </nav>
+
 
     <!-- Barra de busca -->
     <nav class="barraDeBusca">
         <div class="containerBusca">
             <input type="text" class="campoBusca" placeholder="Buscar..." />
             <button class="botaoBusca">Buscar</button>
+            <ul class="sugestoes-lista" id="sugestoes-lista"></ul>
         </div>
     </nav>
+
+
 
     <!-- Conteúdo principal -->
     <main class="containerPrincipal">
@@ -159,7 +163,7 @@
         }
 
 
-        // ✅ Função adicionada para botões de rolagem funcionarem
+        // Função adicionada para botões de rolagem funcionarem
         function rolarCarrosselDestaque(direcao) {
             const carrossel = document.getElementById('carrossel-destaque');
             const scrollAmount = 300;
@@ -168,7 +172,10 @@
                 behavior: 'smooth'
             });
         }
+
     </script>
+
 </body>
+ <script src="Javascript/busca.js"></script>
 
 </html>
